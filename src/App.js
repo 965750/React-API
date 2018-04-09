@@ -47,46 +47,50 @@ class App extends Component {
 
     let i = this.state.contacts.length - 1;
     let emailUp = this.emailInp.value.toUpperCase();
-    var count = this.state.contacts.length;
+    let count = this.state.contacts.length;
+
+    let add = document.getElementById("add");
+    let error = document.getElementById("error");
+    let alertICont = document.querySelector(".alertICont");
+    let alertSpan = document.querySelector(".errorCont .alertICont span");
+    let errorContent = document.getElementById("errorContent");
 
     for (i; i >= 0; i--) {
-     
-      let arrUp = this.state.contacts[i].email.toUpperCase();
 
-      if (arrUp.includes(emailUp)) {
-        document.getElementById("add").style.animation = "btnAdd .3s";
-        document.getElementById("error").style.display = "flex";
-        document.querySelector(".alertICont").style.border = "2px solid #f00";
-        document.querySelector(".errorCont .alertICont span").style.color = "#f00";
-        document.getElementById("errorContent").innerText = "E-mail is already on a list";
+      let arrUp = this.state.contacts[i].email.toUpperCase();
+      
+      if (this.emailInp.value === '' || this.firstNameInp.value === ''){
+       
+        errorCont.style.display = "block";
+        errorSmall.innerText = "Please don't leave empty fields";
+
+      } else if (arrUp.includes(emailUp)) {
+        add.style.animation = "btnAdd .3s";
+        error.style.display = "flex";
+        alertICont.style.border = "2px solid #f00";
+        alertSpan.style.color = "#f00";
+        errorContent.innerText = "E-mail is already on a list";
 
         this.setState({
           isDoubled: 1
         });
         this.inputToggle();
         break;
+      
       } else {
         count--;
       }
     }
 
     if (this.state.contacts.length < 10 && count === 0) {
-      if (this.emailInp.value === '') {
-        document.getElementById("add").style.animation = "btnAdd .3s";
-        //show error - email empty
 
-        document.getElementById("error").style.display = "flex";
-        document.querySelector(".alertICont").style.border = "2px solid #f00";
-        document.querySelector(".errorCont .alertICont span").style.color = "#f00";
-        document.getElementById("errorContent").innerText = "Please provide a valid E-mail";
-      } else {
-        document.getElementById("add").style.animation = "btnAdd .3s";
+        add.style.animation = "btnAdd .3s";
         //show error - added
 
-        document.getElementById("error").style.display = "flex";
-        document.querySelector(".alertICont").style.border = "2px solid #04ab6b";
-        document.querySelector(".errorCont .alertICont span").style.color = "#04ab6b";
-        document.getElementById("errorContent").innerText = "User added";
+        error.style.display = "flex";
+        alertICont.style.border = "2px solid #04ab6b";
+        alertSpan.style.color = "#04ab6b";
+        errorContent.innerText = "User added";
 
         this.firstNameInp.value = '';
         this.emailInp.value = '';
@@ -115,9 +119,8 @@ class App extends Component {
 
         this.inputToggle();
 
-      }
 
-    } else if(count === 0) {
+    } else if (count === 0) {
       submitBtn.setAttribute("disabled", "disabled");
 
       errorCont.style.display = "block";
@@ -162,7 +165,7 @@ class App extends Component {
     let btnAdd = document.getElementById("add");
     let firstInp = document.getElementById("inpName");
     let error = document.getElementById("error");
-    
+
     // btn or form
 
     if (this.state.btnActive === false) {
@@ -201,7 +204,7 @@ class App extends Component {
     let submitBtn = document.getElementById("submitBtn");
 
     // name check
-    var letters = /^[A-Za-z ]+$/;
+    const letters = /^[A-Za-z ]+$/;
 
     if (this.firstNameInp.value.length > 0 || this.emailInp.value.length > 0) {
       document.getElementById('btnR').style.display = 'inline-block';
@@ -230,7 +233,7 @@ class App extends Component {
 
       return true;
     } else {
-     
+
       submitBtn.setAttribute("disabled", "disabled");
       errorCont.style.display = "block";
       errorSmall.innerText = "Name should contain only letters";

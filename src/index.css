@@ -103,6 +103,9 @@ form input[type="submit"]{
   font-weight: 700;
   border-radius: 3px;
 }
+form input[type="submit"]:hover{
+  cursor: pointer;
+}
 .errorCont{
   height: 40px;
   display: none;
