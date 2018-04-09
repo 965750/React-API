@@ -70,7 +70,7 @@ class App extends Component {
       }
     }
 
-    if (this.state.contacts.length < 10 && count == 0) {
+    if (this.state.contacts.length < 10 && count === 0) {
       if (this.emailInp.value === '') {
         document.getElementById("add").style.animation = "btnAdd .3s";
         //show error - email empty
@@ -146,7 +146,7 @@ class App extends Component {
       method: 'DELETE',
     })
       .then(resp => resp.json())
-      .then(data => console.log(data))
+      .then(data => data)
 
     if (this.state.contacts.length === 1) {
       let empty = document.getElementById("emptyInfo");
