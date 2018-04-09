@@ -47,16 +47,18 @@ class App extends Component {
 
     let i = this.state.contacts.length - 1;
     let emailUp = this.emailInp.value.toUpperCase();
+    var count = this.state.contacts.length;
 
     for (i; i >= 0; i--) {
      
       let arrUp = this.state.contacts[i].email.toUpperCase();
 
       if (arrUp.includes(emailUp)) {
+        document.getElementById("add").style.animation = "btnAdd .3s";
         document.getElementById("error").style.display = "flex";
         document.querySelector(".alertICont").style.border = "2px solid #f00";
         document.querySelector(".errorCont .alertICont span").style.color = "#f00";
-        document.getElementById("errorContent").innerText = "E-mail already on list";
+        document.getElementById("errorContent").innerText = "E-mail is already on a list";
 
         this.setState({
           isDoubled: 1
@@ -64,12 +66,11 @@ class App extends Component {
         this.inputToggle();
         break;
       } else {
-
+        count--;
       }
     }
 
-    if (this.state.contacts.length < 10) {
-
+    if (this.state.contacts.length < 10 && count == 0) {
       if (this.emailInp.value === '') {
         document.getElementById("add").style.animation = "btnAdd .3s";
         //show error - email empty
@@ -77,7 +78,7 @@ class App extends Component {
         document.getElementById("error").style.display = "flex";
         document.querySelector(".alertICont").style.border = "2px solid #f00";
         document.querySelector(".errorCont .alertICont span").style.color = "#f00";
-        document.getElementById("errorContent").innerText = "Please provide correct E-mail";
+        document.getElementById("errorContent").innerText = "Please provide a valid E-mail";
       } else {
         document.getElementById("add").style.animation = "btnAdd .3s";
         //show error - added
@@ -116,7 +117,7 @@ class App extends Component {
 
       }
 
-    } else {
+    } else if(count === 0) {
       submitBtn.setAttribute("disabled", "disabled");
 
       errorCont.style.display = "block";
@@ -213,7 +214,7 @@ class App extends Component {
       submitBtn.setAttribute("disabled", "disabled");
 
       errorCont.style.display = "block";
-      errorSmall.innerText = "Please provide correct E-mail";
+      errorSmall.innerText = "Please provide a valid E-mail";
 
       return true;
     } else {
