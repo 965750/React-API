@@ -64,7 +64,7 @@ class App extends Component {
         errorCont.style.display = "block";
         errorSmall.innerText = "Please don't leave empty fields";
 
-      } else if (arrUp.includes(emailUp)) {
+      } else if (arrUp === emailUp) {
         add.style.animation = "btnAdd .3s";
         error.style.display = "flex";
         alertICont.style.border = "2px solid #f00";
@@ -131,7 +131,7 @@ class App extends Component {
         errorSmall.innerText = "";
       }, 3000)
       this.setState({
-        emailDoubled: false
+        isDoubled: false
       });
     }
   }
